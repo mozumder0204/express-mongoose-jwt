@@ -1,7 +1,7 @@
 exports.constants = {
   admin: {
     name: 'admin',
-    email: 'admin@admin.com',
+    email: 'mozumder0204@gmail.com',
   },
   confirmEmails: {
     from: 'no-reply@test-app.com',
