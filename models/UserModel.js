@@ -15,7 +15,10 @@ var UserSchema = new mongoose.Schema(
     otpTries: { type: Number, required: false, default: 0 },
     status: { type: Boolean, required: true, default: 1 },
   },
-  { timestamps: true }
+  {
+    versionKey: false,
+    timestamps: true,
+  }
 );
 
 // Virtual for user's full name
