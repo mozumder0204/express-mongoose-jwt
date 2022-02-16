@@ -1,8 +1,8 @@
-"use strict";
+'use strict';
 
-const config = require("../config");
-const User = require("../models/user.model");
-const passportJWT = require("passport-jwt");
+const config = require('../config');
+const User = require('../models/user.model');
+const passportJWT = require('passport-jwt');
 
 const ExtractJwt = passportJWT.ExtractJwt;
 const JwtStrategy = passportJWT.Strategy;
