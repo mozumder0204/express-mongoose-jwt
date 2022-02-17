@@ -10,6 +10,10 @@ var ProductSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    imagePath: {
+      type: String,
+      required: true,
+    },
     isDisabled: {
       type: Boolean,
       default: false,

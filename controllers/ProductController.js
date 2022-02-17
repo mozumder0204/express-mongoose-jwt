@@ -6,6 +6,8 @@ const {
 const apiResponse = require('../helpers/apiResponse');
 const auth = require('../middlewares/jwt');
 var mongoose = require('mongoose');
+var fs = require('fs');
+
 mongoose.set('useFindAndModify', false);
 
 // Product Schema
@@ -13,6 +15,7 @@ function ProductData(data) {
   this.id = data._id;
   this.title = data.title;
   this.description = data.description;
+  this.imagePath = data.imagePath;
   this.isDisabled = data.isDisabled;
   this.createdAt = data.createdAt;
   this.createdBy = data.createdBy;
@@ -32,6 +35,7 @@ exports.productList = [
         {
           title: 1,
           description: 1,
+          imagePath: 1,
           createdAt: 1,
           createdBy: 1,
         }
@@ -75,6 +79,7 @@ exports.productDetail = [
         {
           title: 1,
           description: 1,
+          imagePath: 1,
           createdAt: 1,
           createdBy: 1,
         }
@@ -122,9 +127,15 @@ exports.productAdd = [
         );
       }
 
+      const imageName = `product${Date.now()}`;
+      const imagePath = `http://${req.get(
+        'host'
+      )}/files/productImage/${imageName}.jpg`;
+
       var product = new Product({
         title: req.body.title,
         description: req.body.description,
+        imagePath: imagePath,
         createdAt: Date.now(),
         createdBy: req.firstName,
       });
@@ -134,6 +145,11 @@ exports.productAdd = [
           return apiResponse.ErrorResponse(res, err);
         }
         let productData = new ProductData(product);
+        fs.writeFileSync(
+          './files/productImage/' + imageName + '.jpg',
+          req.body.base64Data,
+          'base64'
+        );
         return apiResponse.successResponseWithData(
           res,
           'Product add Success.',
