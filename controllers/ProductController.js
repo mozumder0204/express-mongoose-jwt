@@ -38,6 +38,7 @@ exports.productList = [
           imagePath: 1,
           createdAt: 1,
           createdBy: 1,
+          isDisabled: 1,
         }
       ).then((products) => {
         if (products.length > 0) {

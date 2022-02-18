@@ -130,24 +130,39 @@ exports.login = async (req, res) => {
                 return apiResponse.successResponseWithData(
                   res,
                   'Login Success.',
-                  userData
+                  {
+                    isAuthenticated: true,
+                    userInformation: userData,
+                  }
                 );
               } else {
-                return apiResponse.unauthorizedResponse(
+                return apiResponse.validationErrorWithData(
                   res,
-                  'Account is not active. Please contact admin.'
+                  'Account is not active. Please contact admin.',
+                  {
+                    isAuthenticated: false,
+                    userInformation: null,
+                  }
                 );
               }
             } else {
-              return apiResponse.unauthorizedResponse(
+              return apiResponse.validationErrorWithData(
                 res,
-                'Account is not confirmed. Please confirm your account.'
+                'Account is not confirmed. Please confirm your account.',
+                {
+                  isAuthenticated: false,
+                  userInformation: null,
+                }
               );
             }
           } else {
-            return apiResponse.unauthorizedResponse(
+            return apiResponse.validationErrorWithData(
               res,
-              'Email or Password wrong.'
+              'Email or Password wrong.',
+              {
+                isAuthenticated: false,
+                userInformation: null,
+              }
             );
           }
         });
@@ -255,16 +270,16 @@ exports.resendConfirmOtp = async (req, res) => {
           //     html
           //   )
           //   .then(function () {
-              user.isConfirmed = 0;
-              user.confirmOTP = otp;
-              // Save user.
-              user.save(function (err) {
-                if (err) {
-                  return apiResponse.ErrorResponse(res, err);
-                }
-                return apiResponse.successResponse(res, 'Confirm otp sent.');
-              });
-            // });
+          user.isConfirmed = 0;
+          user.confirmOTP = otp;
+          // Save user.
+          user.save(function (err) {
+            if (err) {
+              return apiResponse.ErrorResponse(res, err);
+            }
+            return apiResponse.successResponse(res, 'Confirm otp sent.');
+          });
+          // });
         } else {
           return apiResponse.unauthorizedResponse(
             res,

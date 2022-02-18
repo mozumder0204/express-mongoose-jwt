@@ -48,6 +48,15 @@ exports.unauthorizedResponse = function (res, msg) {
   return res.status(401).json(data);
 };
 
+exports.unauthorizedResponseWithData = function (res, msg, data) {
+  var resData = {
+    status: 0,
+    message: msg,
+    data: data,
+  };
+  return res.status(401).json(resData);
+};
+
 exports.tokenMissingResponse = function (res, msg) {
   var data = {
     status: 0,
