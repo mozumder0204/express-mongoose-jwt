@@ -39,6 +39,11 @@ exports.productList = [
           createdAt: 1,
           createdBy: 1,
           isDisabled: 1,
+        },
+        {
+          $sort: {
+            _id: -1,
+          },
         }
       ).then((products) => {
         if (products.length > 0) {

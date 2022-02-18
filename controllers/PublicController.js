@@ -22,6 +22,12 @@ exports.publicProductList = async (req, res) => {
       {
         title: 1,
         description: 1,
+        imagePath: 1,
+      },
+      {
+        $sort: {
+          _id: -1,
+        },
       }
     ).then((products) => {
       if (products.length > 0) {
@@ -59,6 +65,7 @@ exports.publicProductDetails = async (req, res) => {
       {
         title: 1,
         description: 1,
+        imagePath: 1,
       }
     ).then((product) => {
       if (product !== null) {
