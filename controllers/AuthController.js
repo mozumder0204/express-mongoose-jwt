@@ -66,6 +66,9 @@ exports.register = async (req, res) => {
           firstName: user.firstName,
           lastName: user.lastName,
           email: user.email,
+          otp:
+            'Due to SMTP Credential Privacy, Mail Can not be sent. So here is the OTP> ' +
+            otp, //Remove this line in production
         };
         return apiResponse.successResponseWithData(
           res,
@@ -277,7 +280,15 @@ exports.resendConfirmOtp = async (req, res) => {
             if (err) {
               return apiResponse.ErrorResponse(res, err);
             }
-            return apiResponse.successResponse(res, 'Confirm otp sent.');
+            return apiResponse.successResponseWithData(
+              res,
+              'Confirm otp sent.',
+              {
+                otp:
+                  'Due to SMTP Credential Privacy, Mail Can not be sent. So here is the OTP> ' +
+                  otp, //Remove this line in production
+              }
+            );
           });
           // });
         } else {

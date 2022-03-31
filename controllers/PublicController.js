@@ -61,7 +61,7 @@ exports.publicProductDetails = async (req, res) => {
   }
   try {
     await Product.findOne(
-      { _id: req.params.id },
+      { _id: req.params.id, isDisabled: false },
       {
         title: 1,
         description: 1,

@@ -9,6 +9,9 @@ const apiResponse = require('./helpers/apiResponse');
 const cors = require('cors');
 const mongoose = require('./services/mongoose');
 
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
+
 // DB connection
 mongoose.connect();
 
@@ -34,6 +37,15 @@ app.use(cors());
 //Route Prefixes
 app.use('/', indexRouter);
 app.use('/api/', apiRouter);
+
+var options = {
+  explorer: true,
+};
+app.use(
+  '/api-docs',
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerDocument, options)
+);
 
 // throw 404 if URL not found
 app.all('*', function (req, res) {

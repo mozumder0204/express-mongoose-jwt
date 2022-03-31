@@ -19,6 +19,7 @@ if (config.env === 'dev') {
 
 exports.connect = () => {
   var mongoURI =
+    // eslint-disable-next-line no-constant-condition
     config.env === 'prod' || 'dev' ? config.mongo.uri : config.mongo.testURI;
 
   mongoose.connect(mongoURI, {
