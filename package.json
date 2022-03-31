@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "start http://localhost:3000/api-docs & node ./bin/www",
+    "start": "start https://express-mongoose-jwt.herokuapp.com/api-docs & node ./bin/www",
     "dev": "npx nodemon ./bin/www"
   },
   "dependencies": {
